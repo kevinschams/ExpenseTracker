@@ -17,7 +17,7 @@ public class ExpenseAdapter extends ArrayAdapter<Expense> {
 
     public ExpenseAdapter(Context context, List<Expense> expenses) {
         super(context, 0, expenses);
-        this.expenses = expenses;
+//        this.expenses = expenses;
     }
 
     @Override
