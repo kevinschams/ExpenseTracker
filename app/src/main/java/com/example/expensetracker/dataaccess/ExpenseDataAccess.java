@@ -74,20 +74,45 @@ public class ExpenseDataAccess {
                 List<Expense> expenses = new ArrayList<>();
                 SQLiteDatabase db = dbHelper.getReadableDatabase();
                 Cursor cursor = db.query(TABLE_EXPENSES, null, null, null, null, null, null);
-                if (cursor.moveToFirst()) {
-                        do {
-                                long id = cursor.getLong(cursor.getColumnIndex(COLUMN_ID));
-                                String name = cursor.getString(cursor.getColumnIndex(COLUMN_NAME));
-                                double amount = cursor.getDouble(cursor.getColumnIndex(COLUMN_AMOUNT));
-                                long dateInMillis = cursor.getLong(cursor.getColumnIndex(COLUMN_DATE));
-                                long categoryId = cursor.getLong(cursor.getColumnIndex(COLUMN_CATEGORY_ID));
-                                Expense expense = new Expense(id, name, amount, new Date(dateInMillis), categoryId);
-                                expenses.add(expense);
-                        } while (cursor.moveToNext());
+                try {
+                        if (cursor != null) {
+                                int idIndex = cursor.getColumnIndex(COLUMN_ID);
+                                int nameIndex = cursor.getColumnIndex(COLUMN_NAME);
+                                int amountIndex = cursor.getColumnIndex(COLUMN_AMOUNT);
+                                int dateIndex = cursor.getColumnIndex(COLUMN_DATE);
+                                int categoryIdIndex = cursor.getColumnIndex(COLUMN_CATEGORY_ID);
+
+                                while (cursor.moveToNext()) {
+                                        long id = cursor.getLong(idIndex);
+                                        String name = cursor.getString(nameIndex);
+                                        double amount = cursor.getDouble(amountIndex);
+                                        long dateInMillis = cursor.getLong(dateIndex);
+                                        long categoryId = cursor.getLong(categoryIdIndex);
+                                        Expense expense = new Expense(id, name, amount, new Date(dateInMillis), categoryId);
+                                        expenses.add(expense);
+                                }
+                        }
+                } finally {
+                        if (cursor != null) {
+                                cursor.close();
+                        }
+                        db.close();
                 }
-                cursor.close();
-                db.close();
                 return expenses;
+                //                if (cursor.moveToFirst()) {
+                //                        do {
+                //                                long id = cursor.getLong(cursor.getColumnIndex(COLUMN_ID));
+                //                                String name = cursor.getString(cursor.getColumnIndex(COLUMN_NAME));
+                //                                double amount = cursor.getDouble(cursor.getColumnIndex(COLUMN_AMOUNT));
+                //                                long dateInMillis = cursor.getLong(cursor.getColumnIndex(COLUMN_DATE));
+                //                                long categoryId = cursor.getLong(cursor.getColumnIndex(COLUMN_CATEGORY_ID));
+                //                                Expense expense = new Expense(id, name, amount, new Date(dateInMillis), categoryId);
+                //                                expenses.add(expense);
+                //                        } while (cursor.moveToNext());
+                //                }
+                //                cursor.close();
+                //                db.close();
+                //                return expenses;
         }
 
 
