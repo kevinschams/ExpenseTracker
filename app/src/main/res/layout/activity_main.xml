@@ -4,27 +4,58 @@
     android:layout_height="match_parent"
     android:padding="16dp">
 
-    <TextView
+    <!-- Expenses Button -->
+    <Button
+        android:id="@+id/btnExpenses"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Expenses"
         android:textSize="24sp"
         android:textStyle="bold"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentStart="true" />
 
+    <!-- Categories Button -->
+    <Button
+        android:id="@+id/btnCategories"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Categories"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@id/btnExpenses" />
+
+    <!-- Categories ListView -->
+    <ListView
+        android:id="@+id/listCategories"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnCategories"
+        android:layout_marginTop="16dp" />
+
+    <!-- Expenses ListView -->
     <ListView
         android:id="@+id/listExpenses"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/listCategories"
         android:layout_marginTop="16dp" />
-<!--    android:layout_below="@id/expenesesAdapter"-->
 
+    <!-- Add Expense Button -->
     <Button
         android:id="@+id/btnAddExpense"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add Expense"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp" />
+    <Button
+        android:id="@+id/btnAddCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Category"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp" />

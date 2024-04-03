@@ -1,8 +1,9 @@
 package com.example.expensetracker.models;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Expense {
+public class Expense implements Serializable {
     private long id;
     private String name;
     private double amount;

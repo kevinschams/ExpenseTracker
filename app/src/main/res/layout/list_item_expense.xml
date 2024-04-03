@@ -24,4 +24,27 @@
         android:layout_height="wrap_content"
         android:textSize="14sp" />
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/buttonDeleteExpense"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delete Expense"
+            android:backgroundTint="#D33737" />
+
+        <Button
+            android:id="@+id/buttonEditExpense"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit Expense"
+            android:layout_marginLeft="8dp"
+            android:backgroundTint="#3D85C6" />
+
+    </LinearLayout>
+
 </LinearLayout>

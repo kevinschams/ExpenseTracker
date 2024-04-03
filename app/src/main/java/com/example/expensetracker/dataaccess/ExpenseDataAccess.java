@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.example.expensetracker.AddExpenseActivity;
 import com.example.expensetracker.models.Expense;
@@ -15,8 +16,16 @@ import java.util.Date;
 import java.util.List;
 
 public class ExpenseDataAccess {
+        private Context context;
+        private MySQLiteHelper dbHelper;
+        private SQLiteDatabase database;
 
-        // Database constants
+        public ExpenseDataAccess(Context context){
+                this.context = context;
+                this.dbHelper = new MySQLiteHelper(context);
+                this.database = this.dbHelper.getWritableDatabase();
+        }
+
         private static final String DATABASE_NAME = "expense_tracker.db";
         private static final int DATABASE_VERSION = 1;
         private static final String TABLE_EXPENSES = "expenses";
@@ -26,38 +35,7 @@ public class ExpenseDataAccess {
         private static final String COLUMN_DATE = "date";
         private static final String COLUMN_CATEGORY_ID = "categoryId";
 
-        // Database helper
-        private MySQLiteHelper dbHelper;
 
-        public ExpenseDataAccess(Context context) {
-                dbHelper = new MySQLiteHelper(context);
-        }
-
-        // Database helper class
-        private static class MySQLiteHelper extends SQLiteOpenHelper {
-                MySQLiteHelper(Context context) {
-                        super(context, DATABASE_NAME, null, DATABASE_VERSION);
-                }
-
-                @Override
-                public void onCreate(SQLiteDatabase db) {
-                        // Create expenses table
-                        String createTable = "CREATE TABLE " + TABLE_EXPENSES + " (" +
-                                COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                                COLUMN_NAME + " TEXT, " +
-                                COLUMN_AMOUNT + " REAL, " +
-                                COLUMN_DATE + " INTEGER, " +
-                                COLUMN_CATEGORY_ID + " INTEGER)";
-                        db.execSQL(createTable);
-                }
-
-                @Override
-                public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-                        // Handle database upgrades (if needed)
-                }
-        }
-
-        // Add expense to database
         public void addExpense(Expense expense) {
                 SQLiteDatabase db = dbHelper.getWritableDatabase();
                 ContentValues values = new ContentValues();
@@ -99,20 +77,6 @@ public class ExpenseDataAccess {
                         db.close();
                 }
                 return expenses;
-                //                if (cursor.moveToFirst()) {
-                //                        do {
-                //                                long id = cursor.getLong(cursor.getColumnIndex(COLUMN_ID));
-                //                                String name = cursor.getString(cursor.getColumnIndex(COLUMN_NAME));
-                //                                double amount = cursor.getDouble(cursor.getColumnIndex(COLUMN_AMOUNT));
-                //                                long dateInMillis = cursor.getLong(cursor.getColumnIndex(COLUMN_DATE));
-                //                                long categoryId = cursor.getLong(cursor.getColumnIndex(COLUMN_CATEGORY_ID));
-                //                                Expense expense = new Expense(id, name, amount, new Date(dateInMillis), categoryId);
-                //                                expenses.add(expense);
-                //                        } while (cursor.moveToNext());
-                //                }
-                //                cursor.close();
-                //                db.close();
-                //                return expenses;
         }
 
 
@@ -132,10 +96,61 @@ public class ExpenseDataAccess {
                 db.update(TABLE_EXPENSES, values, selection, selectionArgs);
                 db.close();
         }
-    public void deleteExpense(long id) {}
-    public Expense getExpenseById(long id) {
-        return null;
-    }
+        public void deleteExpense(long id) {
+                SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+                // Define the WHERE clause to identify the expense to be deleted
+                String selection = COLUMN_ID + " = ?";
+                String[] selectionArgs = { String.valueOf(id) };
+
+                // Delete the expense from the database
+                db.delete(TABLE_EXPENSES, selection, selectionArgs);
+
+                db.close();
+        }
+        public Expense getExpenseById(long id) {
+                SQLiteDatabase db = dbHelper.getReadableDatabase();
+                Expense expense = null;
+
+                // Define the WHERE clause to select the expense by its ID
+                String selection = COLUMN_ID + " = ?";
+                String[] selectionArgs = { String.valueOf(id) };
+
+                Cursor cursor = db.query(
+                        TABLE_EXPENSES,
+                        null,
+                        selection,
+                        selectionArgs,
+                        null,
+                        null,
+                        null
+                );
+
+                try {
+                        if (cursor != null && cursor.moveToFirst()) {
+                                int idIndex = cursor.getColumnIndex(COLUMN_ID);
+                                int nameIndex = cursor.getColumnIndex(COLUMN_NAME);
+                                int amountIndex = cursor.getColumnIndex(COLUMN_AMOUNT);
+                                int dateIndex = cursor.getColumnIndex(COLUMN_DATE);
+                                int categoryIdIndex = cursor.getColumnIndex(COLUMN_CATEGORY_ID);
+
+                                long expenseId = cursor.getLong(idIndex);
+                                String name = cursor.getString(nameIndex);
+                                double amount = cursor.getDouble(amountIndex);
+                                long dateInMillis = cursor.getLong(dateIndex);
+                                long categoryId = cursor.getLong(categoryIdIndex);
+
+                                expense = new Expense(expenseId, name, amount, new Date(dateInMillis), categoryId);
+                        }
+                } finally {
+                        if (cursor != null) {
+                                cursor.close();
+                        }
+                        db.close();
+                }
+
+                return expense;
+        }
 
 }
 

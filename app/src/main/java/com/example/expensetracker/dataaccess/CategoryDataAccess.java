@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.example.expensetracker.models.Category;
 import com.example.expensetracker.sqlite.MySQLiteHelper;
@@ -13,40 +14,21 @@ import java.util.List;
 
 public class CategoryDataAccess {
 
+    private Context context;
+    private MySQLiteHelper dbHelper;
+    private SQLiteDatabase database;
+    public CategoryDataAccess(Context context) {
+        this.context = context;
+        this.dbHelper = new MySQLiteHelper(context);
+        this.database = this.dbHelper.getWritableDatabase();
+    }
+
     // Database constants
     private static final String DATABASE_NAME = "expense_tracker.db";
     private static final int DATABASE_VERSION = 1;
     private static final String TABLE_CATEGORIES = "categories";
     private static final String COLUMN_ID = "id";
     private static final String COLUMN_NAME = "name";
-
-    // Database helper
-    private MySQLiteHelper dbHelper;
-
-    public CategoryDataAccess(Context context) {
-        dbHelper = new MySQLiteHelper(context);
-    }
-
-    // Database helper class
-    private static class MySQLiteHelper extends SQLiteOpenHelper {
-        MySQLiteHelper(Context context) {
-            super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        }
-
-        @Override
-        public void onCreate(SQLiteDatabase db) {
-            // Create categories table
-            String createTable = "CREATE TABLE " + TABLE_CATEGORIES + " (" +
-                    COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    COLUMN_NAME + " TEXT)";
-            db.execSQL(createTable);
-        }
-
-        @Override
-        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-            // Handle database upgrades (if needed)
-        }
-    }
 
     // Add category to database
     public void addCategory(Category category) {
@@ -62,18 +44,27 @@ public class CategoryDataAccess {
         List<Category> categories = new ArrayList<>();
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.query(TABLE_CATEGORIES, null, null, null, null, null, null);
-        if (cursor.moveToFirst()) {
-            do {
-                long id = cursor.getLong(cursor.getColumnIndex(COLUMN_ID));
-                String name = cursor.getString(cursor.getColumnIndex(COLUMN_NAME));
-                Category category = new Category(id, name);
-                categories.add(category);
-            } while (cursor.moveToNext());
+        try {
+            if (cursor != null && cursor.moveToFirst()) {
+                int idIndex = cursor.getColumnIndex(COLUMN_ID);
+                int nameIndex = cursor.getColumnIndex(COLUMN_NAME);
+
+                do {
+                    long id = cursor.getLong(idIndex);
+                    String name = cursor.getString(nameIndex);
+                    Category category = new Category(id, name);
+                    categories.add(category);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+            db.close();
         }
-        cursor.close();
-        db.close();
         return categories;
     }
+
 
 
 
@@ -91,7 +82,12 @@ public class CategoryDataAccess {
         db.update(TABLE_CATEGORIES, values, selection, selectionArgs);
         db.close();
     }
-    public void deleteCategory(long id) {}
+    public void deleteCategory(long id) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        db.delete(TABLE_CATEGORIES, COLUMN_ID + " = ?", new String[]{String.valueOf(id)});
+        db.close();
+    }
+
     public Category getCategoryById(long id) {
         return null;
     }
