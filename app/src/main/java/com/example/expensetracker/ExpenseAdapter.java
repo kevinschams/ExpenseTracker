@@ -20,6 +20,7 @@ public class ExpenseAdapter extends ArrayAdapter<Expense> {
     private OnDeleteClickListener deleteClickListener;
     private OnEditClickListener editClickListener; // New interface for edit button click
     private ExpenseDataAccess expenseDataAccess;
+    private boolean showButtons;
 
     public interface OnDeleteClickListener {
         void onDeleteClick(int position);
@@ -29,10 +30,11 @@ public class ExpenseAdapter extends ArrayAdapter<Expense> {
         void onEditClick(Expense expense);
     }
 
-    public ExpenseAdapter(Context context, List<Expense> expenses, ExpenseDataAccess expenseDataAccess) {
+    public ExpenseAdapter(Context context, List<Expense> expenses, ExpenseDataAccess expenseDataAccess, boolean showButtons) {
         super(context, 0, expenses);
         this.expenses = expenses;
         this.expenseDataAccess = expenseDataAccess;
+        this.showButtons = showButtons; // Initialize the flag
     }
 
     public void setOnDeleteClickListener(OnDeleteClickListener listener) {
@@ -61,6 +63,14 @@ public class ExpenseAdapter extends ArrayAdapter<Expense> {
         tvAmount.setText(String.valueOf(expense.getAmount()));
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
         tvDate.setText(sdf.format(expense.getDate()));
+        // Hide buttons based on the flag
+        if (!showButtons) {
+            btnDelete.setVisibility(View.GONE);
+            btnEdit.setVisibility(View.GONE);
+        } else {
+            btnDelete.setVisibility(View.VISIBLE);
+            btnEdit.setVisibility(View.VISIBLE);
+        }
 
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override

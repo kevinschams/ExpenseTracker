@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
         expenseDataAccess = new ExpenseDataAccess(this);
         final List<Expense> expenses = expenseDataAccess.getAllExpenses();
 
-        expenseAdapter = new ExpenseAdapter(this, expenses, expenseDataAccess);
+        expenseAdapter = new ExpenseAdapter(this, expenses, expenseDataAccess, true);
         listViewExpenses.setAdapter(expenseAdapter);
 
         // Set OnClickListener for delete button in each row of the ListView
@@ -167,7 +167,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Initialize ExpenseAdapter if not already initialized
         if (expenseAdapter == null) {
-            expenseAdapter = new ExpenseAdapter(MainActivity.this, expenses, expenseDataAccess);
+            expenseAdapter = new ExpenseAdapter(MainActivity.this, expenses, expenseDataAccess, true);
             listViewExpenses.setAdapter(expenseAdapter);
         } else {
             // Update existing adapter with new data

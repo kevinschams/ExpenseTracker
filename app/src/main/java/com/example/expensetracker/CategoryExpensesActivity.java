@@ -33,7 +33,7 @@ public class CategoryExpensesActivity extends AppCompatActivity {
         List<Expense> categoryExpenses = expenseDataAccess.getExpensesByCategory(categoryId);
 
         // Initialize and set up the ExpenseAdapter
-        expenseAdapter = new ExpenseAdapter(this, categoryExpenses, expenseDataAccess);
+        expenseAdapter = new ExpenseAdapter(this, categoryExpenses, expenseDataAccess, false);
         listViewExpenses.setAdapter(expenseAdapter);
     }
 }
