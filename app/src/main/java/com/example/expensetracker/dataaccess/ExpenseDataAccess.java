@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.example.expensetracker.AddExpenseActivity;
+//import com.example.expensetracker.AddExpenseActivity;
 import com.example.expensetracker.models.Expense;
 import com.example.expensetracker.sqlite.MySQLiteHelper;
 
@@ -150,6 +150,53 @@ public class ExpenseDataAccess {
                 }
 
                 return expense;
+        }
+
+        public List<Expense> getExpensesByCategory(long categoryId) {
+                List<Expense> expenses = new ArrayList<>();
+                SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+                // Define the WHERE clause to select expenses by category ID
+                String selection = COLUMN_CATEGORY_ID + " = ?";
+                String[] selectionArgs = { String.valueOf(categoryId) };
+
+                Cursor cursor = db.query(
+                        TABLE_EXPENSES,
+                        null,
+                        selection,
+                        selectionArgs,
+                        null,
+                        null,
+                        null
+                );
+
+                try {
+                        if (cursor != null) {
+                                int idIndex = cursor.getColumnIndex(COLUMN_ID);
+                                int nameIndex = cursor.getColumnIndex(COLUMN_NAME);
+                                int amountIndex = cursor.getColumnIndex(COLUMN_AMOUNT);
+                                int dateIndex = cursor.getColumnIndex(COLUMN_DATE);
+
+                                while (cursor.moveToNext()) {
+                                        long id = cursor.getLong(idIndex);
+                                        String name = cursor.getString(nameIndex);
+                                        double amount = cursor.getDouble(amountIndex);
+                                        long dateInMillis = cursor.getLong(dateIndex);
+
+                                        // Since we're querying by category, we already have the category ID
+                                        // No need to retrieve it from the cursor
+                                        Expense expense = new Expense(id, name, amount, new Date(dateInMillis), categoryId);
+                                        expenses.add(expense);
+                                }
+                        }
+                } finally {
+                        if (cursor != null) {
+                                cursor.close();
+                        }
+                        db.close();
+                }
+
+                return expenses;
         }
 
 }

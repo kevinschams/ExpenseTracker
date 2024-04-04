@@ -1,6 +1,8 @@
 package com.example.expensetracker.models;
 
-public class Category {
+import java.io.Serializable;
+
+public class Category implements Serializable {
     private long id;
     private String name;
 
@@ -32,5 +34,9 @@ public class Category {
 
     public void setName(String name) {
         this.name = name;
+    }
+    @Override
+    public String toString() {
+        return name; // Return the category name instead of the object reference
     }
 }

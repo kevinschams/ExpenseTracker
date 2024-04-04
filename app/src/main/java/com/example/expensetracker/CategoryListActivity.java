@@ -14,7 +14,7 @@ import com.example.expensetracker.models.Category;
 
 import java.util.List;
 
-public class CategoryListActivity extends AppCompatActivity {
+public class CategoryListActivity extends AppCompatActivity implements CategoryAdapter.OnDeleteClickListener, CategoryAdapter.OnViewClickListener{
 
     private EditText editCategoryName;
     private Button btnSaveCategory;
@@ -36,7 +36,9 @@ public class CategoryListActivity extends AppCompatActivity {
                 saveCategory();
             }
         });
+
     }
+
 
     private void saveCategory() {
         String name = editCategoryName.getText().toString().trim();
@@ -45,21 +47,26 @@ public class CategoryListActivity extends AppCompatActivity {
             Toast.makeText(this, "Please enter a category name", Toast.LENGTH_SHORT).show();
             return;
         }
-
         // Create a new Category object
         Category category = new Category(name);
 
         // Add the new category to the database
         categoryDataAccess.addCategory(category);
 
-        // Retrieve all categories from the database
-//        List<Category> updatedCategories = categoryDataAccess.getAllCategories();
-
-
-
         // Go back to the main activity where the categories button is clicked
         Intent intent = new Intent(CategoryListActivity.this, MainActivity.class);
         startActivity(intent);
     }
 
+    @Override
+    public void onViewClick(long categoryId) {
+        Intent intent = new Intent(CategoryListActivity.this, CategoryExpensesActivity.class);
+        intent.putExtra("category_id", categoryId);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onDeleteClick(int position) {
+
+    }
 }

@@ -12,6 +12,7 @@ import com.example.expensetracker.dataaccess.CategoryDataAccess;
 import com.example.expensetracker.dataaccess.ExpenseDataAccess;
 import com.example.expensetracker.models.Category;
 import com.example.expensetracker.models.Expense;
+import com.example.expensetracker.AddExpenseActivity;
 
 import java.util.List;
 
@@ -135,7 +136,8 @@ public class MainActivity extends AppCompatActivity {
             public void onEditClick(Expense expense) {
                 // Start AddExpenseActivity with the selected expense for editing
                 Intent intent = new Intent(MainActivity.this, AddExpenseActivity.class);
-                intent.putExtra("expenseToEdit", expense);
+//                intent.putExtra("expenseToEdit", expense);
+                intent.putExtra("expense_id", expense.getId());
                 startActivity(intent);
             }
         });
