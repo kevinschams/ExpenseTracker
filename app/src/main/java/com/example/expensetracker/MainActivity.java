@@ -165,7 +165,6 @@ public class MainActivity extends AppCompatActivity {
         // Fetch expenses from the database
         List<Expense> expenses = expenseDataAccess.getAllExpenses();
 
-        // Initialize ExpenseAdapter if not already initialized
         if (expenseAdapter == null) {
             expenseAdapter = new ExpenseAdapter(MainActivity.this, expenses, expenseDataAccess, true);
             listViewExpenses.setAdapter(expenseAdapter);
@@ -177,9 +176,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // Method to load categories
     private void loadCategories() {
-        // Initialize CategoryDataAccess if not already initialized
         if (categoryDataAccess == null) {
             categoryDataAccess = new CategoryDataAccess(MainActivity.this);
         }
@@ -187,7 +184,6 @@ public class MainActivity extends AppCompatActivity {
         // Fetch categories from the database
         List<Category> categories = categoryDataAccess.getAllCategories();
 
-        // Initialize CategoryAdapter if not already initialized
         if (categoryAdapter == null) {
             categoryAdapter = new CategoryAdapter(MainActivity.this, categories, categoryDataAccess);
             listViewCategories.setAdapter(categoryAdapter);

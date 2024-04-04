@@ -88,7 +88,7 @@ public class AddExpenseActivity extends AppCompatActivity {
         }
 
         double amount = Double.parseDouble(amountString);
-        Date date = new Date(); // You can customize this to allow user input for date
+        Date date = new Date();
 
         // Get the selected category from the spinner
         Category selectedCategory = (Category) categorySpinner.getSelectedItem();

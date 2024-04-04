@@ -74,11 +74,9 @@ public class CategoryDataAccess {
         ContentValues values = new ContentValues();
         values.put(COLUMN_NAME, category.getName());
 
-        // Define the WHERE clause to identify the category to be updated
         String selection = COLUMN_ID + " = ?";
         String[] selectionArgs = { String.valueOf(category.getId()) };
 
-        // Update the category in the database
         db.update(TABLE_CATEGORIES, values, selection, selectionArgs);
         db.close();
     }

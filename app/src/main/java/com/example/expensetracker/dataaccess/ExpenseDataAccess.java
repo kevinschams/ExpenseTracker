@@ -88,22 +88,18 @@ public class ExpenseDataAccess {
                 values.put(COLUMN_DATE, expense.getDate().getTime());
                 values.put(COLUMN_CATEGORY_ID, expense.getCategoryId());
 
-                // Define the WHERE clause to identify the expense to be updated
                 String selection = COLUMN_ID + " = ?";
                 String[] selectionArgs = { String.valueOf(expense.getId()) };
 
-                // Update the expense in the database
                 db.update(TABLE_EXPENSES, values, selection, selectionArgs);
                 db.close();
         }
         public void deleteExpense(long id) {
                 SQLiteDatabase db = dbHelper.getWritableDatabase();
 
-                // Define the WHERE clause to identify the expense to be deleted
                 String selection = COLUMN_ID + " = ?";
                 String[] selectionArgs = { String.valueOf(id) };
 
-                // Delete the expense from the database
                 db.delete(TABLE_EXPENSES, selection, selectionArgs);
 
                 db.close();
@@ -112,7 +108,6 @@ public class ExpenseDataAccess {
                 SQLiteDatabase db = dbHelper.getReadableDatabase();
                 Expense expense = null;
 
-                // Define the WHERE clause to select the expense by its ID
                 String selection = COLUMN_ID + " = ?";
                 String[] selectionArgs = { String.valueOf(id) };
 
@@ -156,7 +151,6 @@ public class ExpenseDataAccess {
                 List<Expense> expenses = new ArrayList<>();
                 SQLiteDatabase db = dbHelper.getReadableDatabase();
 
-                // Define the WHERE clause to select expenses by category ID
                 String selection = COLUMN_CATEGORY_ID + " = ?";
                 String[] selectionArgs = { String.valueOf(categoryId) };
 
@@ -183,8 +177,6 @@ public class ExpenseDataAccess {
                                         double amount = cursor.getDouble(amountIndex);
                                         long dateInMillis = cursor.getLong(dateIndex);
 
-                                        // Since we're querying by category, we already have the category ID
-                                        // No need to retrieve it from the cursor
                                         Expense expense = new Expense(id, name, amount, new Date(dateInMillis), categoryId);
                                         expenses.add(expense);
                                 }

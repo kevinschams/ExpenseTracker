@@ -24,7 +24,7 @@ public class CategoryExpensesActivity extends AppCompatActivity {
         listViewExpenses = findViewById(R.id.listCategoryExpenses);
 
         // Get the category ID passed from the previous activity
-        long categoryId = getIntent().getLongExtra("category_id", -1); // Corrected the key name to match the one used in CategoryAdapter
+        long categoryId = getIntent().getLongExtra("category_id", -1);
 
         // Initialize ExpenseDataAccess
         expenseDataAccess = new ExpenseDataAccess(this);
