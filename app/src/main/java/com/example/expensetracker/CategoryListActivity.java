@@ -30,6 +30,7 @@ public class CategoryListActivity extends AppCompatActivity implements CategoryA
         btnSaveCategory = findViewById(R.id.btnSaveCategory);
         categoryDataAccess = new CategoryDataAccess(this);
 
+
         btnSaveCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

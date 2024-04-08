@@ -45,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
         listViewCategories.setVisibility(View.GONE);
         btnAddCategory.setVisibility(View.GONE);
 
+
+
         btnAddExpense.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

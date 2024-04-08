@@ -43,6 +43,8 @@ public class AddExpenseActivity extends AppCompatActivity {
         categorySpinner = findViewById(R.id.spinnerCategories);
         btnSaveExpense = findViewById(R.id.btnSaveExpense);
 
+
+
         expenseDataAccess = new ExpenseDataAccess(this);
         categoryDataAccess = new CategoryDataAccess(this);
 
@@ -112,7 +114,7 @@ public class AddExpenseActivity extends AppCompatActivity {
         }
 
         Toast.makeText(this, "Expense " + (editingExpense != null ? "updated" : "added") + " successfully", Toast.LENGTH_SHORT).show();
-        finish(); // Close the activity after adding or updating Expense
+        finish();
     }
 
     // Helper method to get the index of a Category by its ID

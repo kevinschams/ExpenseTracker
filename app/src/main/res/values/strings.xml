@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Expense Tracker</string>
     <string name="title_activity_add_expense">AddExpenseActivity</string>
     <!-- Strings used for fragments for navigation -->
@@ -43,4 +43,15 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+    <string name="hint_expense_name">Expense Name</string>
+    <string name="hint_expense_amount">Expense Amount</string>
+    <string name="hint_category_name">Category Name</string>
+    <string name="button_add_expense">Add Expense</string>
+    <string name="button_add_category">Add Category</string>
+    <string name="button_delete">Delete</string>
+    <string name="button_view">View</string>
+    <string name="button_edit">Edit</string>
+    <string name="default_category_name">Select Category</string>
+
+
 </resources>

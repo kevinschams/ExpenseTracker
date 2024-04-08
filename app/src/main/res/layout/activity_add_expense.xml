@@ -9,7 +9,7 @@
         android:id="@+id/editExpenseName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Expense Name"
+        android:hint="@string/hint_expense_name"
         android:inputType="text" />
 
     <!-- Expense Amount EditText -->
@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/editExpenseName"
         android:layout_marginTop="16dp"
-        android:hint="Expense Amount"
+        android:hint="@string/hint_expense_amount"
         android:inputType="numberDecimal" />
 
     <!-- Category Spinner -->

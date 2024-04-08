@@ -9,7 +9,7 @@
         android:id="@+id/editCategoryName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Expense Name"
+        android:hint="@string/hint_category_name"
         android:inputType="text" />
 
 
