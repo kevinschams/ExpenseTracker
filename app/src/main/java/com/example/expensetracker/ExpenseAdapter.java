@@ -15,12 +15,13 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class ExpenseAdapter extends ArrayAdapter<Expense> {
-
+//    This adapter class is used to populate a list of expenses in a ListView.
+//    It includes functionality for deleting expenses and editing existing expenses.
     private List<Expense> expenses;
     private OnDeleteClickListener deleteClickListener;
     private OnEditClickListener editClickListener; // New interface for edit button click
     private ExpenseDataAccess expenseDataAccess;
-    private boolean showButtons;
+    private boolean showButtons; //If true it display delete and edit, if false it does not
 
     public interface OnDeleteClickListener {
         void onDeleteClick(int position);
@@ -93,14 +94,5 @@ public class ExpenseAdapter extends ArrayAdapter<Expense> {
         return convertView;
     }
 
-    // Method to add a new expense to the list and update the dataset
-    public void addExpense(Expense expense) {
-        // Add the new expense to the list
-        expenses.add(expense);
-        // Update the dataset
-        notifyDataSetChanged();
-        // Update the expense in the database
-        expenseDataAccess.updateExpense(expense);
-    }
 }
 

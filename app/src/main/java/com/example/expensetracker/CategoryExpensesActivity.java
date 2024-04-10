@@ -11,7 +11,8 @@ import com.example.expensetracker.models.Expense;
 import java.util.List;
 
 public class CategoryExpensesActivity extends AppCompatActivity {
-
+//    This activity displays a list of expenses associated with a specific category.
+//    It retrieves the category ID passed from the previous activity and fetches expenses accordingly.
     private ListView listViewExpenses;
     private ExpenseAdapter expenseAdapter;
     private ExpenseDataAccess expenseDataAccess;

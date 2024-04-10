@@ -9,6 +9,9 @@
 <!--    android:paddingEnd="16dp"-->
 <!--    android:minHeight="?android:attr/listPreferredItemHeightSmall"-->
 <!--    android:textColor="#000000" />-->
+
+<!--    This layout file defines the appearance of each item in the category Spinner.
+It includes a TextView for displaying the category name.-->
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@android:id/text1"
     android:layout_width="match_parent"

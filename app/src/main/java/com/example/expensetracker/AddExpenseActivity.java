@@ -22,6 +22,8 @@ import java.util.List;
 
 public class AddExpenseActivity extends AppCompatActivity {
 
+//    This activity allows users to add new expenses or edit existing ones.
+//    It includes functionality to save the expense details and populate fields for editing existing expenses.
     private EditText editExpenseName, editExpenseAmount;
     private Spinner categorySpinner;
     private Button btnSaveExpense;

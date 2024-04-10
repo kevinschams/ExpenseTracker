@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--    This layout file defines the UI for each item in the category ListView.
+It includes a TextView for displaying the category name and Buttons for deleting and viewing the category.-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -13,20 +15,6 @@
         android:textStyle="bold"
         android:textSize="16sp" />
 
-<!--    <Button-->
-<!--        android:id="@+id/buttonDeleteCategory"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="Delete"-->
-<!--        android:backgroundTint="#D33737" />-->
-
-<!--    <Button-->
-<!--        android:id="@+id/buttonViewCategory"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="View"-->
-<!--        android:backgroundTint="#3D85C6"-->
-<!--        android:layout_marginLeft="8dp"/>-->
 
     <Button
         android:id="@+id/buttonDeleteCategory"

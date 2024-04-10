@@ -14,7 +14,8 @@ import com.example.expensetracker.models.Category;
 import java.util.List;
 
 public class CategoryAdapter extends ArrayAdapter<Category> {
-
+//    This adapter class is used to populate a list of categories in a ListView.
+//    It includes functionality for deleting categories and viewing expenses associated with each category.
     private List<Category> categories;
     private OnDeleteClickListener deleteClickListener;
     private OnViewClickListener viewClickListener; // Add view click listener
@@ -38,9 +39,6 @@ public class CategoryAdapter extends ArrayAdapter<Category> {
         this.deleteClickListener = listener;
     }
 
-    public void setOnViewClickListener(OnViewClickListener listener) {
-        this.viewClickListener = listener;
-    }
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
@@ -78,13 +76,5 @@ public class CategoryAdapter extends ArrayAdapter<Category> {
         return convertView;
     }
 
-    // Method to add a new category to the list and update the dataset
-    public void addCategory(Category category) {
-        // Add the new category to the list
-        categories.add(category);
-        // Update the dataset
-        notifyDataSetChanged();
-        categoryDataAccess.updateCategory(category);
-    }
 }
 

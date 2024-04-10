@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--    This layout file defines the UI for adding or editing expenses.
+    It includes EditText fields for entering expense name and amount,
+ a Spinner for selecting a category, and a Button for saving the expense.-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"

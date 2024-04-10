@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--    This layout file defines the UI for each item in the expense ListView.
+ It includes TextViews for displaying the expense name, amount, and date,
+ as well as Buttons for deleting and editing the expense.-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -51,15 +54,15 @@
             android:text="@string/button_delete"
             android:backgroundTint="#D33737"/>
 
-                <Button
-                    android:id="@+id/buttonEditExpense"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/button_edit"
-                    android:layout_marginLeft="8dp"
-                    android:backgroundTint="#3D85C6"/>
+        <Button
+            android:id="@+id/buttonEditExpense"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button_edit"
+            android:layout_marginLeft="8dp"
+            android:backgroundTint="#3D85C6"/>
 
 
-            </LinearLayout>
+    </LinearLayout>
 
-        </LinearLayout>
+</LinearLayout>

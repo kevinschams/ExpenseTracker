@@ -17,7 +17,10 @@ import com.example.expensetracker.AddExpenseActivity;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
+//    This is the main activity of the application.
+//    It provides buttons to navigate between viewing expenses and categories,
+//    as well as adding new expenses and categories.
+//    It also includes functionality to handle CRUD operations for expenses and categories.
     private Button btnAddExpense;
     private Button btnExpenses; // Button for expenses
     private Button btnCategories; // Button for categories

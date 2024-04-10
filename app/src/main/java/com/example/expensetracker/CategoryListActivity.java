@@ -14,8 +14,9 @@ import com.example.expensetracker.models.Category;
 
 import java.util.List;
 
-public class CategoryListActivity extends AppCompatActivity implements CategoryAdapter.OnDeleteClickListener, CategoryAdapter.OnViewClickListener{
-
+public class CategoryListActivity extends AppCompatActivity implements CategoryAdapter.OnDeleteClickListener{
+//    This activity allows users to add new categories.
+//    It includes functionality to save new categories and navigate to viewing expenses for each category.
     private EditText editCategoryName;
     private Button btnSaveCategory;
     private CategoryDataAccess categoryDataAccess;
@@ -59,12 +60,6 @@ public class CategoryListActivity extends AppCompatActivity implements CategoryA
         startActivity(intent);
     }
 
-    @Override
-    public void onViewClick(long categoryId) {
-        Intent intent = new Intent(CategoryListActivity.this, CategoryExpensesActivity.class);
-        intent.putExtra("category_id", categoryId);
-        startActivity(intent);
-    }
 
     @Override
     public void onDeleteClick(int position) {
